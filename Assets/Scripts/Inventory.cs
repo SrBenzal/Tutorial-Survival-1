@@ -57,9 +57,10 @@ public class Inventory : MonoBehaviour {
 
 	public void AddItem(GameObject item){
 		if (item.GetComponent<ItemPickup>().craftMaterial == false) {
+			print ("test");
 			GameObject rootItem;
 			rootItem = item.GetComponent<ItemPickup> ().rootItem;
-
+			print (rootItem.name);
 			for (int i = 0; i < maxInventory; i++) {
 				if (slot[i].GetComponent<Slot>().empty ==true && item.GetComponent<ItemPickup>().pickedUp == false) {
 					slot [i].GetComponent<Slot> ().item = rootItem;
@@ -110,5 +111,21 @@ public class Inventory : MonoBehaviour {
 			slot [i] = slotHolder.transform.GetChild (i);
 			//print (slot [i].name);
 		}
+	}
+
+	public int getRocks(){
+		return rockCount;
+	}
+
+	public int getWood(){
+		return woodCount;
+	}
+
+	public void setRocks(int rocks){
+		rockCount = rocks;
+	}
+
+	public void setWood(int wood){
+		woodCount = wood;
 	}
 }
