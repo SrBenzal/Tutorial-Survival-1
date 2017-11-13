@@ -59,7 +59,9 @@ public class Inventory : MonoBehaviour {
 					slot [i].GetComponent<Slot> ().item = item;
 					item.GetComponent<ItemPickup> ().pickedUp = true;
 					item.transform.parent = itemDatabase.transform;
-					//item.SetActive (false);
+				
+					item.GetComponent<MeshRenderer> ().enabled = false;
+					Destroy(item.GetComponent<Rigidbody>());
 				}
 			}
 		}

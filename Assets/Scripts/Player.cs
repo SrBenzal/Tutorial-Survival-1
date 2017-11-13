@@ -9,8 +9,9 @@ public class Player : MonoBehaviour {
 	private float hunger, thirst, health;
 
 	public float hungerIncrease, thirstIncrease;
-
-
+	private bool triggeringTree = false;
+	private GameObject tree;
+	public static bool weaponEquiped;
 	//Functions
 
 	void Start(){
@@ -26,6 +27,16 @@ public class Player : MonoBehaviour {
 			Die ();
 		}
 
+		//Triggering with tree and chopping it
+		if (triggeringTree==true && weaponEquiped) {
+			//Attacking the tree
+			if(Input.GetMouseButtonDown(0)){
+				if (tree) {
+					tree.GetComponent<Tree> ().currentHealth -= 25;
+				}
+			}
+			//print ("Triggering with tree");
+		}
 		//print(hunger + " " + thirst);
 	}
 
@@ -47,4 +58,17 @@ public class Player : MonoBehaviour {
 		print ("Player is DEAD");
 	}
 
+	public void OnTriggerEnter(Collider other){
+		if (other.tag == "Tree") {
+			triggeringTree = true;
+			tree = other.gameObject;
+		}
+	}
+
+	public void OnTriggerExit(Collider other){
+		if (other.tag == "Tree") {
+			triggeringTree = false;
+			tree = null;
+		}
+	}
 }

@@ -12,11 +12,11 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler {
 	public Texture itemTexture;
 	public GameObject item;
 
-
+	private GameObject player;
 	//Functions
 
 	void Start () {
-		
+		player = GameObject.FindWithTag ("Player");
 	}
 	
 	void Update () {
@@ -33,8 +33,9 @@ public class Slot : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler {
 
 	public void OnPointerDown(PointerEventData eventData){
 		if (item) {
-			//print (item.name);	
+			//print (item.name);
 			item.SetActive(true);
+			Player.weaponEquiped = true;
 		}
 	}
 

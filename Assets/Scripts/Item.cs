@@ -15,8 +15,9 @@ public class Item : MonoBehaviour {
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.F) && craftMaterial) {
+		if (Input.GetKeyDown(KeyCode.F) && !craftMaterial) {
 			this.gameObject.SetActive(false);
+			Player.weaponEquiped = false;
 		}
 	}
 }
