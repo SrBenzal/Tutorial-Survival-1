@@ -8,10 +8,21 @@ public class Item : MonoBehaviour {
 	//Variables
 	public Texture itemTexture;
 	public bool craftMaterial;
-
 	//Functions
+
+	public enum Type{
+		Rock,
+		Wood
+	};
+
+	public Type type;
+
 	void Start () {
-		
+		switch (this.tag) {
+		default:
+			break;
+
+		}
 	}
 
 	void Update () {

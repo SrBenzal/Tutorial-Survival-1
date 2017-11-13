@@ -22,9 +22,9 @@ public class Tree : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (currentHealth<=0) {
-			for (int i = 0; i < amountOfItems; i++) {
+			for (int i = 0; i < itemTable.Length; i++) {
 				Instantiate (itemTable [i].transform,this.transform.position,Quaternion.identity);
-				if (i==(amountOfItems-1)) {
+				if (i==(itemTable.Length-1)) {
 					itemsDropped = true;
 				}
 			}

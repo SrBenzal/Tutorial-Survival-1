@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour {
 
@@ -9,11 +10,14 @@ public class Inventory : MonoBehaviour {
 	public GameObject inventory;
 	public GameObject itemDatabase;
 	public GameObject slotHolder;
+	public Text rockCountText, woodCountText;
 
 	private Transform[] slot;
 	private bool pickedupItem;
 	private int maxInventory;
-
+	private int rockCount = 0, woodCount = 0;
+	private bool isItemTriggered=false;
+	private GameObject itemTriggered;
 	//Functions
 
 	public void Start(){
@@ -30,15 +34,26 @@ public class Inventory : MonoBehaviour {
 		} else {
 			inventory.SetActive (false);
 		}
+		if (isItemTriggered && Input.GetKeyDown(KeyCode.E)) {
+			print (itemTriggered.name);
+			AddItem (itemTriggered);
+		}
 	}
-
 
 	public void OnTriggerEnter(Collider other){
 		if (other.tag=="Item") {
-			//print ("Item triggered");
-			AddItem(other.gameObject);
+			isItemTriggered=true;
+			itemTriggered = other.gameObject;
 		}
 	}
+
+	public void OnTriggerExit(Collider other){
+		if (other.tag=="Item") {
+			isItemTriggered=false;
+			itemTriggered = null;
+		}
+	}
+
 
 	public void AddItem(GameObject item){
 		if (item.GetComponent<ItemPickup>().craftMaterial == false) {
@@ -53,7 +68,7 @@ public class Inventory : MonoBehaviour {
 				}
 			}
 
-		} else {
+		} else {/*
 			for (int i = 0; i < maxInventory; i++) {
 				if (slot[i].GetComponent<Slot>().empty ==true && item.GetComponent<ItemPickup>().pickedUp == false) {
 					slot [i].GetComponent<Slot> ().item = item;
@@ -63,8 +78,28 @@ public class Inventory : MonoBehaviour {
 					item.GetComponent<MeshRenderer> ().enabled = false;
 					Destroy(item.GetComponent<Rigidbody>());
 				}
+			}*/
+			switch (item.GetComponent<Item>().type) {
+			default:
+				break;
+			case Item.Type.Rock:
+				rockCount += 1;
+				break;
+			case Item.Type.Wood:
+				woodCount += 1;
+				break;
 			}
+			UpdateCount ();
+			Destroy (item);
 		}
+		itemTriggered=null;
+		isItemTriggered = false;
+
+	}
+
+	public void UpdateCount(){
+		rockCountText.text = rockCount.ToString();
+		woodCountText.text = woodCount.ToString();
 	}
 
 	public void GetAllSlots(){
