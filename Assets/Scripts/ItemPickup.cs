@@ -11,11 +11,13 @@ public class ItemPickup : MonoBehaviour {
 
 	//Functions
 
-	void Start () {
+	void Start ()
+    {
 		
 	}
 	
-	void Update () {
+	void Update ()
+    {
 		
 	}
 }

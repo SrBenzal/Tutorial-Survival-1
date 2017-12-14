@@ -35,7 +35,9 @@ public class Inventory : MonoBehaviour {
 			inventory.SetActive (false);
 		}
 		if (isItemTriggered && Input.GetKeyDown(KeyCode.E)) {
-			print (itemTriggered.name);
+            GetComponent<CameraManager>().onSelection = true;
+            GetComponent<CameraManager>().chooseMoveiment();
+            print (itemTriggered.name);
 			AddItem (itemTriggered);
 		}
 	}
@@ -116,6 +118,12 @@ public class Inventory : MonoBehaviour {
 	public int getRocks(){
 		return rockCount;
 	}
+    //added
+    public GameObject getItemTriggered() { 
+        if (isItemTriggered)
+                return itemTriggered;
+        return null;
+    }
 
 	public int getWood(){
 		return woodCount;

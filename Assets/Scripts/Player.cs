@@ -28,7 +28,7 @@ public class Player : MonoBehaviour {
 		}
 
 		//Triggering with tree and chopping it
-		if (triggeringTree==true && weaponEquiped) {
+		if (triggeringTree && weaponEquiped) {
 			//Attacking the tree
 			if(Input.GetMouseButtonDown(0)){
 				if (tree) {
